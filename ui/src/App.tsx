@@ -10,6 +10,7 @@ const App = () => {
     criticalDamageChance: 5,
     criticalDamageModifier: 200,
     castFrequencyModifier: 0,
+    areaModifier: 0,
     multiCastChance: 0,
   });
 

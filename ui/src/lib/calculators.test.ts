@@ -47,6 +47,7 @@ describe("compareOffensiveFactor", () => {
     criticalDamageChance: 20,
     criticalDamageModifier: 250,
     castFrequencyModifier: 0,
+    areaModifier: 0,
     multiCastChance: 0,
   };
 

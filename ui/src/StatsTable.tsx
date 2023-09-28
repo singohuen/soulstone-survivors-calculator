@@ -60,6 +60,11 @@ const StatsTable = () => {
                 skill: "RELENTLESS",
               },
               {
+                label: "Area modifier",
+                field: "areaModifier",
+                skill: "AREA",
+              },
+              {
                 label: "Multi cast chance",
                 field: "multiCastChance",
                 skill: "MULTICAST",

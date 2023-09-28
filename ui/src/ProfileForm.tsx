@@ -58,6 +58,14 @@ const ProfileForm = () => {
       </div>
 
       <div>
+        <Label htmlFor="areaModifier">Area modifier</Label>
+        <Input
+          id="areaModifier"
+          {...register("areaModifier", { valueAsNumber: true })}
+        />
+      </div>
+
+      <div>
         <Label htmlFor="multiCastChance">Multi cast chance</Label>
         <Input
           id="multiCastChance"

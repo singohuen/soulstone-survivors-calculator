@@ -45,6 +45,7 @@ export function offensiveFactor(
   criticalDamageChance: number,
   criticalDamageModifier: number,
   castFrequencyModifier: number,
+  areaModifier: number,
   multiCastChance: number
 ): number {
   const maxTier = maxCriticalTier(criticalDamageChance);
@@ -65,9 +66,11 @@ export function offensiveFactor(
 
   const cooldown = BASE_COOLDOWN / (100 + castFrequencyModifier);
 
+  const area = 100 + areaModifier;
+
   const casts = averageCasts(multiCastChance);
 
-  return (damage * casts) / cooldown;
+  return (damage * area * casts) / cooldown;
 }
 
 export function compareOffensiveFactor(
@@ -79,6 +82,7 @@ export function compareOffensiveFactor(
     baseProfile.criticalDamageChance,
     baseProfile.criticalDamageModifier,
     baseProfile.castFrequencyModifier,
+    baseProfile.areaModifier,
     baseProfile.multiCastChance
   );
   const newOffensiveFactor = offensiveFactor(
@@ -86,6 +90,7 @@ export function compareOffensiveFactor(
     newProfile.criticalDamageChance,
     newProfile.criticalDamageModifier,
     newProfile.castFrequencyModifier,
+    newProfile.areaModifier,
     newProfile.multiCastChance
   );
 
@@ -112,6 +117,9 @@ export function nextProfile(
       break;
     case "RELENTLESS":
       newProfile.castFrequencyModifier += SkillValue[skill][rarity] ?? 0;
+      break;
+    case "AREA":
+      newProfile.areaModifier += SkillValue[skill][rarity] ?? 0;
       break;
     case "MULTICAST":
       newProfile.multiCastChance += SkillValue[skill][rarity] ?? 0;

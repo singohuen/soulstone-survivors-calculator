@@ -5,6 +5,7 @@ export type Skill =
   | "LETHALITY"
   | "MERCILESS"
   | "RELENTLESS"
+  | "AREA"
   | "MULTICAST";
 
 export type Profile = {
@@ -12,5 +13,6 @@ export type Profile = {
   criticalDamageChance: number;
   criticalDamageModifier: number;
   castFrequencyModifier: number;
+  areaModifier: number;
   multiCastChance: number;
 };
