@@ -12,7 +12,6 @@ const App = () => {
     castFrequencyModifier: 0,
     multiCastChance: 0,
   });
-  console.log("profile", profile);
 
   return (
     <ProfileContext.Provider value={{ profile, setProfile }}>

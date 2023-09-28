@@ -3,7 +3,7 @@ import { Input } from "./components/ui/input";
 import { Label } from "./components/ui/label";
 import { Button } from "./components/ui/button";
 import { Profile } from "./lib/types";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ProfileContext from "./Profile.context";
 
 interface ProfileFormData extends Profile {}
@@ -18,6 +18,10 @@ const ProfileForm = () => {
   const onSubmit = handleSubmit((data) => {
     setProfile(data);
   });
+
+  useEffect(() => {
+    reset(profile);
+  }, [profile, reset]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -62,10 +66,6 @@ const ProfileForm = () => {
       </div>
 
       <Button>Save</Button>
-
-      <Button variant={"outline"} type="button" onClick={() => reset()}>
-        Reset
-      </Button>
     </form>
   );
 };

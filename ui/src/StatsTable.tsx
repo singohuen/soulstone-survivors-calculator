@@ -15,9 +15,10 @@ import uncommon from "./assets/rarity-frames/uncommon.webp";
 import rare from "./assets/rarity-frames/rare.webp";
 import epic from "./assets/rarity-frames/epic.webp";
 import legendary from "./assets/rarity-frames/legendary.webp";
+import { Button } from "./components/ui/button";
 
 const StatsTable = () => {
-  const { profile } = useContext(ProfileContext);
+  const { profile, setProfile } = useContext(ProfileContext);
 
   return (
     <section>
@@ -80,6 +81,15 @@ const StatsTable = () => {
                     profile,
                     nextProfile(profile, row.skill, rarity)
                   ) || "-"}
+                  <Button
+                    type="button"
+                    variant={"link"}
+                    onClick={() =>
+                      setProfile(nextProfile(profile, row.skill, rarity))
+                    }
+                  >
+                    Apply
+                  </Button>
                 </TableCell>
               ))}
             </TableRow>
