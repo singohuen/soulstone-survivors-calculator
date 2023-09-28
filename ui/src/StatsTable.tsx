@@ -16,13 +16,14 @@ import rare from "./assets/rarity-frames/rare.webp";
 import epic from "./assets/rarity-frames/epic.webp";
 import legendary from "./assets/rarity-frames/legendary.webp";
 import { Button } from "./components/ui/button";
+import { H3 } from "./components/ui/typography";
 
 const StatsTable = () => {
   const { profile, setProfile } = useContext(ProfileContext);
 
   return (
     <section>
-      <h2>Stats</h2>
+      <H3>Stats</H3>
       <Table>
         <TableHeader>
           <TableRow>

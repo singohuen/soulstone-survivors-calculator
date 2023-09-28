@@ -5,6 +5,7 @@ import { Button } from "./components/ui/button";
 import { Profile } from "./lib/types";
 import { useContext, useEffect } from "react";
 import ProfileContext from "./Profile.context";
+import { H3 } from "./components/ui/typography";
 
 interface ProfileFormData extends Profile {}
 
@@ -25,9 +26,7 @@ const ProfileForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-        Profile
-      </h3>
+      <H3>Profile</H3>
       {(
         [
           {

@@ -16,11 +16,13 @@ const App = () => {
 
   return (
     <ProfileContext.Provider value={{ profile, setProfile }}>
-      <section className="w-3/4 mx-auto p-4">
-        <ProfileForm />
-      </section>
+      <main className="container">
+        <section className="w-3/4 mx-auto p-4">
+          <ProfileForm />
+        </section>
 
-      <StatsTable />
+        <StatsTable />
+      </main>
     </ProfileContext.Provider>
   );
 };
