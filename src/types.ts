@@ -4,11 +4,13 @@ export type Skill =
   | "POWERFUL_STRIKES"
   | "LETHALITY"
   | "MERCILESS"
-  | "RELENTLESS";
+  | "RELENTLESS"
+  | "MULTICAST";
 
 export type Case = {
   damageModifier: number;
   criticalDamageChance: number;
   criticalDamageModifier: number;
   castFrequencyModifier: number;
+  multiCastChance: number;
 };

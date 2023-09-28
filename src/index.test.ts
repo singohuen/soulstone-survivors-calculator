@@ -5,6 +5,7 @@ import {
   offensiveFactor,
   compareOffensiveFactor,
   nextCase,
+  averageCasts,
 } from "./index";
 
 test("maxCriticalTier(1)", () => expect(maxCriticalTier(1)).toBe(1));
@@ -36,12 +37,18 @@ test("adjustedCriticalDamageChance(200)", () =>
 test("adjustedCriticalDamageChance(201)", () =>
   expect(adjustedCriticalDamageChance(201)).toBe(1));
 
+test("averageCasts(0)", () => expect(averageCasts(0)).toBe(1));
+test("averageCasts(10)", () => expect(averageCasts(10)).toBe(1.16));
+test("averageCasts(100)", () => expect(averageCasts(100)).toBe(2.62));
+test("averageCasts(200)", () => expect(averageCasts(200)).toBe(3.25));
+
 describe("compareOffensiveFactor", () => {
   const baseCase = {
     damageModifier: 50,
     criticalDamageChance: 20,
     criticalDamageModifier: 250,
     castFrequencyModifier: 0,
+    multiCastChance: 0,
   };
 
   test("POWERFUL_STRIKES | COMMON", () => {

@@ -23,6 +23,23 @@ export function adjustedCriticalDamageChance(
   return adjustedChance;
 }
 
+export function averageCasts(multiCastChance: number): number {
+  const ROUND = 5;
+  const DECAY_RATE = 0.4;
+
+  let chance = 0;
+
+  for (let i = 1; i <= ROUND; i++) {
+    let roundChance = 100;
+    if (i > 1) {
+      roundChance = multiCastChance * Math.pow(DECAY_RATE, i - 2);
+    }
+    chance += Math.min(roundChance, 100);
+  }
+
+  return Math.round(chance) / 100;
+}
+
 export function offensiveFactor(
   damageModifier: number,
   criticalDamageChance: number,
@@ -47,7 +64,9 @@ export function offensiveFactor(
 
   const cooldown = BASE_COOLDOWN / (100 + castFrequencyModifier);
 
-  return damage / cooldown;
+  const casts = averageCasts(castFrequencyModifier);
+
+  return (damage * casts) / cooldown;
 }
 
 export function compareOffensiveFactor(baseCase: Case, newCase: Case) {

@@ -29,6 +29,13 @@ const SkillValue: Record<Skill, Record<Rarity, number | undefined>> = {
     EPIC: 20,
     LEGENDARY: undefined,
   },
+  MULTICAST: {
+    COMMON: 4,
+    UNCOMMON: 8,
+    RARE: 12,
+    EPIC: 16,
+    LEGENDARY: 20,
+  },
 };
 
 export default SkillValue;
