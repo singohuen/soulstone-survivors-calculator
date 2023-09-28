@@ -1,9 +1,9 @@
-import { Button } from "./components/ui/button";
+import CaseForm from "./CaseForm";
 
 const App = () => {
   return (
     <div>
-      <Button variant={"outline"}>Click me</Button>
+      <CaseForm />
     </div>
   );
 };
