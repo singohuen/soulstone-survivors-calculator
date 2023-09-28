@@ -6,7 +6,7 @@ import {
   compareOffensiveFactor,
   nextCase,
   averageCasts,
-} from "./index";
+} from "./calculators";
 
 test("maxCriticalTier(1)", () => expect(maxCriticalTier(1)).toBe(1));
 test("maxCriticalTier(50)", () => expect(maxCriticalTier(50)).toBe(1));

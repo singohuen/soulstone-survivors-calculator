@@ -2,28 +2,21 @@ import { useForm } from "react-hook-form";
 import { Input } from "./components/ui/input";
 import { Label } from "./components/ui/label";
 import { Button } from "./components/ui/button";
+import { Profile } from "./lib/types";
+import { useContext } from "react";
+import ProfileContext from "./Profile.context";
 
-interface CaseFormData {
-  damageModifier: number;
-  criticalDamageChance: number;
-  criticalDamageModifier: number;
-  castFrequencyModifier: number;
-  multiCastChance: number;
-}
+interface ProfileFormData extends Profile {}
 
-const CaseForm = () => {
-  const { register, handleSubmit } = useForm<CaseFormData>({
-    defaultValues: {
-      damageModifier: 0,
-      criticalDamageChance: 5,
-      criticalDamageModifier: 200,
-      castFrequencyModifier: 0,
-      multiCastChance: 0,
-    },
+const ProfileForm = () => {
+  const { profile, setProfile } = useContext(ProfileContext);
+
+  const { register, handleSubmit } = useForm<ProfileFormData>({
+    defaultValues: profile,
   });
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    setProfile(data);
   });
 
   return (
@@ -73,4 +66,4 @@ const CaseForm = () => {
   );
 };
 
-export default CaseForm;
+export default ProfileForm;
