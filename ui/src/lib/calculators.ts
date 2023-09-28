@@ -124,6 +124,9 @@ export function nextProfile(
     case "MULTICAST":
       newProfile.multiCastChance += SkillValue[skill][rarity] ?? 0;
       break;
+    case "LEVIATHAN":
+      newProfile.damageModifier += SkillValue[skill][rarity] ?? 0;
+      break;
   }
   return newProfile;
 }

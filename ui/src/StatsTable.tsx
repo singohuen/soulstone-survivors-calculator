@@ -40,34 +40,39 @@ const StatsTable = () => {
           {(
             [
               {
-                label: "Damage modifier",
+                label: "Damage modifier (Powerful strikes)",
                 field: "damageModifier",
                 skill: "POWERFUL_STRIKES",
               },
               {
-                label: "Critical damage chance",
+                label: "Critical damage chance (Lethality)",
                 field: "criticalDamageChance",
                 skill: "LETHALITY",
               },
               {
-                label: "Critical damage modifier",
+                label: "Critical damage modifier (Merciless)",
                 field: "criticalDamageModifier",
                 skill: "MERCILESS",
               },
               {
-                label: "Cast frequency modifier",
+                label: "Cast frequency modifier (Relentless)",
                 field: "castFrequencyModifier",
                 skill: "RELENTLESS",
               },
               {
-                label: "Area modifier",
+                label: "Area modifier (Area)",
                 field: "areaModifier",
                 skill: "AREA",
               },
               {
-                label: "Multi cast chance",
+                label: "Multi cast chance (Multicast)",
                 field: "multiCastChance",
                 skill: "MULTICAST",
+              },
+              {
+                label: "Damage modifier (Leviathan)",
+                field: "damageModifier",
+                skill: "LEVIATHAN",
               },
             ] as {
               label: string;
@@ -75,28 +80,29 @@ const StatsTable = () => {
               skill: Skill;
             }[]
           ).map((row) => (
-            <TableRow key={row.field}>
+            <TableRow key={row.label}>
               <TableCell>{row.label}</TableCell>
               <TableCell>{profile[row.field]}</TableCell>
               {(
                 ["COMMON", "UNCOMMON", "RARE", "EPIC", "LEGENDARY"] as Rarity[]
-              ).map((rarity) => (
-                <TableCell key={rarity}>
-                  {compareOffensiveFactor(
-                    profile,
-                    nextProfile(profile, row.skill, rarity)
-                  ) || "-"}
-                  <Button
-                    type="button"
-                    variant={"link"}
-                    onClick={() =>
-                      setProfile(nextProfile(profile, row.skill, rarity))
-                    }
-                  >
-                    Apply
-                  </Button>
-                </TableCell>
-              ))}
+              ).map((rarity) => {
+                const next = nextProfile(profile, row.skill, rarity);
+                const increment = compareOffensiveFactor(profile, next);
+                return (
+                  <TableCell key={rarity}>
+                    {increment || "-"}
+                    {!!increment && (
+                      <Button
+                        type="button"
+                        variant={"link"}
+                        onClick={() => setProfile(next)}
+                      >
+                        Apply
+                      </Button>
+                    )}
+                  </TableCell>
+                );
+              })}
             </TableRow>
           ))}
         </TableBody>

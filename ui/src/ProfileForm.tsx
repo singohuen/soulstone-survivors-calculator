@@ -25,53 +25,42 @@ const ProfileForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div>
-        <Label htmlFor="damageModifier">Damage modifier</Label>
-        <Input
-          id="damageModifier"
-          {...register("damageModifier", { valueAsNumber: true })}
-        />
-      </div>
-
-      <div>
-        <Label htmlFor="criticalDamageChance">Critical damage chance</Label>
-        <Input
-          id="criticalDamageChance"
-          {...register("criticalDamageChance", { valueAsNumber: true })}
-        />
-      </div>
-
-      <div>
-        <Label htmlFor="criticalDamageModifier">Critical damage modifier</Label>
-        <Input
-          id="criticalDamageModifier"
-          {...register("criticalDamageModifier", { valueAsNumber: true })}
-        />
-      </div>
-
-      <div>
-        <Label htmlFor="castFrequencyModifier">Cast frequency modifier</Label>
-        <Input
-          id="castFrequencyModifier"
-          {...register("castFrequencyModifier", { valueAsNumber: true })}
-        />
-      </div>
-
-      <div>
-        <Label htmlFor="areaModifier">Area modifier</Label>
-        <Input
-          id="areaModifier"
-          {...register("areaModifier", { valueAsNumber: true })}
-        />
-      </div>
-
-      <div>
-        <Label htmlFor="multiCastChance">Multi cast chance</Label>
-        <Input
-          id="multiCastChance"
-          {...register("multiCastChance", { valueAsNumber: true })}
-        />
-      </div>
+      {(
+        [
+          {
+            label: "Damage modifier",
+            field: "damageModifier",
+          },
+          {
+            label: "Critical damage chance",
+            field: "criticalDamageChance",
+          },
+          {
+            label: "Critical damage modifier",
+            field: "criticalDamageModifier",
+          },
+          {
+            label: "Cast frequency modifier",
+            field: "castFrequencyModifier",
+          },
+          {
+            label: "Area modifier",
+            field: "areaModifier",
+          },
+          {
+            label: "Multi cast chance",
+            field: "multiCastChance",
+          },
+        ] as { label: string; field: keyof ProfileFormData }[]
+      ).map((field) => (
+        <div key={field.field}>
+          <Label htmlFor={field.field}>{field.label}</Label>
+          <Input
+            id={field.field}
+            {...register(field.field, { valueAsNumber: true })}
+          />
+        </div>
+      ))}
 
       <Button>Save</Button>
     </form>

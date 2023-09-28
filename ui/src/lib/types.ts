@@ -6,7 +6,8 @@ export type Skill =
   | "MERCILESS"
   | "RELENTLESS"
   | "AREA"
-  | "MULTICAST";
+  | "MULTICAST"
+  | "LEVIATHAN";
 
 export type Profile = {
   damageModifier: number;
