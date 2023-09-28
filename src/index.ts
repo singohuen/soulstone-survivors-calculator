@@ -26,7 +26,8 @@ export function adjustedCriticalDamageChance(
 export function offensiveFactor(
   damageModifier: number,
   criticalDamageChance: number,
-  criticalDamageModifier: number
+  criticalDamageModifier: number,
+  castFrequencyModifier: number
 ): number {
   const maxTier = maxCriticalTier(criticalDamageChance);
   const adjustedChance = adjustedCriticalDamageChance(criticalDamageChance);
@@ -44,19 +45,23 @@ export function offensiveFactor(
       BASE_DAMAGE * (100 + damageModifier) * (100 - adjustedChance);
   }
 
-  return damage / BASE_COOLDOWN;
+  const cooldown = BASE_COOLDOWN / (100 + castFrequencyModifier);
+
+  return damage / cooldown;
 }
 
 export function compareOffensiveFactor(baseCase: Case, newCase: Case) {
   const baseOffensiveFactor = offensiveFactor(
     baseCase.damageModifier,
     baseCase.criticalDamageChance,
-    baseCase.criticalDamageModifier
+    baseCase.criticalDamageModifier,
+    baseCase.castFrequencyModifier
   );
   const newOffensiveFactor = offensiveFactor(
     newCase.damageModifier,
     newCase.criticalDamageChance,
-    newCase.criticalDamageModifier
+    newCase.criticalDamageModifier,
+    newCase.castFrequencyModifier
   );
 
   return Math.round(
@@ -75,6 +80,9 @@ export function nextCase(baseCase: Case, skill: Skill, rarity: Rarity): Case {
       break;
     case "MERCILESS":
       newCase.criticalDamageModifier += SkillValue[skill][rarity] ?? 0;
+      break;
+    case "RELENTLESS":
+      newCase.castFrequencyModifier += SkillValue[skill][rarity] ?? 0;
       break;
   }
   return newCase;

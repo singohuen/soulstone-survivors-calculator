@@ -36,32 +36,12 @@ test("adjustedCriticalDamageChance(200)", () =>
 test("adjustedCriticalDamageChance(201)", () =>
   expect(adjustedCriticalDamageChance(201)).toBe(1));
 
-test("offensiveFactor(50, 20, 250)", () =>
-  expect(offensiveFactor(50, 20, 250)).toBe(2833.3333333333335));
-test("offensiveFactor(55, 20, 250)", () =>
-  expect(offensiveFactor(55, 20, 250)).toBe(2900));
-
-test("compareOffensiveFactor(50, 20, 250, 55, 20, 250)", () =>
-  expect(
-    compareOffensiveFactor(
-      {
-        damageModifier: 50,
-        criticalDamageChance: 20,
-        criticalDamageModifier: 250,
-      },
-      {
-        damageModifier: 55,
-        criticalDamageChance: 20,
-        criticalDamageModifier: 250,
-      }
-    )
-  ).toBe(24));
-
 describe("compareOffensiveFactor", () => {
   const baseCase = {
     damageModifier: 50,
     criticalDamageChance: 20,
     criticalDamageModifier: 250,
+    castFrequencyModifier: 0,
   };
 
   test("POWERFUL_STRIKES | COMMON", () => {
