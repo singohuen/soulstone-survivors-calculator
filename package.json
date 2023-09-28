@@ -1,5 +1,6 @@
 {
   "name": "soulstone-survivors-calculator",
+  "private": true,
   "module": "index.ts",
   "devDependencies": {
     "bun-types": "latest"
@@ -8,7 +9,7 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "dev": "bun src/index.ts",
+    "dev": "bun src/lib/index.ts",
     "test": "bun test"
   },
   "type": "module"
