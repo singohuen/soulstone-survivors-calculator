@@ -2,6 +2,7 @@ import { useState } from "react";
 import ProfileContext from "./Profile.context";
 import ProfileForm from "./ProfileForm";
 import { Profile } from "./lib/types";
+import StatsTable from "./StatsTable";
 
 const App = () => {
   const [profile, setProfile] = useState<Profile>({
@@ -16,6 +17,8 @@ const App = () => {
   return (
     <ProfileContext.Provider value={{ profile, setProfile }}>
       <ProfileForm />
+
+      <StatsTable />
     </ProfileContext.Provider>
   );
 };
