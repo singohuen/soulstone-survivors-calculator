@@ -11,7 +11,7 @@ interface ProfileFormData extends Profile {}
 const ProfileForm = () => {
   const { profile, setProfile } = useContext(ProfileContext);
 
-  const { register, handleSubmit } = useForm<ProfileFormData>({
+  const { register, handleSubmit, reset } = useForm<ProfileFormData>({
     defaultValues: profile,
   });
 
@@ -62,6 +62,10 @@ const ProfileForm = () => {
       </div>
 
       <Button>Save</Button>
+
+      <Button variant={"outline"} type="button" onClick={() => reset()}>
+        Reset
+      </Button>
     </form>
   );
 };
