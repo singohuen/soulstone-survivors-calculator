@@ -16,7 +16,9 @@ const App = () => {
 
   return (
     <ProfileContext.Provider value={{ profile, setProfile }}>
-      <ProfileForm />
+      <section className="w-3/4 mx-auto p-4">
+        <ProfileForm />
+      </section>
 
       <StatsTable />
     </ProfileContext.Provider>

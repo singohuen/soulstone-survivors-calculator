@@ -25,6 +25,9 @@ const ProfileForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
+      <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+        Profile
+      </h3>
       {(
         [
           {
@@ -53,7 +56,7 @@ const ProfileForm = () => {
           },
         ] as { label: string; field: keyof ProfileFormData }[]
       ).map((field) => (
-        <div key={field.field}>
+        <div key={field.field} className="grid grid-cols-2 items-center">
           <Label htmlFor={field.field}>{field.label}</Label>
           <Input
             id={field.field}
@@ -62,7 +65,7 @@ const ProfileForm = () => {
         </div>
       ))}
 
-      <Button>Save</Button>
+      <Button className="w-full mt-8">Save</Button>
     </form>
   );
 };
