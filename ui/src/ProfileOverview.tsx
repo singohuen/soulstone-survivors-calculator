@@ -22,8 +22,10 @@ const ProfileOverview = () => {
       <H3>
         Profile
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger>
-            <Button variant={"link"}>Update</Button>
+          <DialogTrigger asChild>
+            <Button variant={"link"} className="ml-2 mb-2">
+              Update
+            </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>

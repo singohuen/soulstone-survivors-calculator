@@ -23,6 +23,7 @@ import merciless from "./assets/skills/merciless.webp";
 import multicast from "./assets/skills/multicast.webp";
 import powerfulStrikes from "./assets/skills/powerful-strikes.webp";
 import relentless from "./assets/skills/relentless.webp";
+import { MoveUp } from "lucide-react";
 
 const UpgradesTable = () => {
   const { profile, setProfile } = useContext(ProfileContext);
@@ -135,15 +136,23 @@ const UpgradesTable = () => {
                 return (
                   <TableCell key={rarity}>
                     <div className="flex flex-col items-center">
-                      {increment || "-"}
-                      {!!increment && (
-                        <Button
-                          type="button"
-                          variant={"link"}
-                          onClick={() => setProfile(next)}
-                        >
-                          Pick
-                        </Button>
+                      {increment ? (
+                        <>
+                          <div>
+                            {increment}
+                            <MoveUp className="w-4 inline text-green-600" />
+                          </div>
+
+                          <Button
+                            type="button"
+                            variant={"link"}
+                            onClick={() => setProfile(next)}
+                          >
+                            Pick
+                          </Button>
+                        </>
+                      ) : (
+                        <div>—</div>
                       )}
                     </div>
                   </TableCell>
