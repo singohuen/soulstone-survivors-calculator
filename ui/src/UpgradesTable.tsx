@@ -7,31 +7,68 @@ import {
   TableHeader,
   TableRow,
 } from "./components/ui/table";
+import { Button } from "./components/ui/button";
 import ProfileContext from "./Profile.context";
 import { compareOffensiveFactor, nextProfile } from "./lib/calculators";
-import { Profile, Rarity, Skill } from "./lib/types";
+import { Rarity, Skill } from "./lib/types";
 import common from "./assets/rarity-frames/common.webp";
 import uncommon from "./assets/rarity-frames/uncommon.webp";
 import rare from "./assets/rarity-frames/rare.webp";
 import epic from "./assets/rarity-frames/epic.webp";
 import legendary from "./assets/rarity-frames/legendary.webp";
-import { Button } from "./components/ui/button";
-import { H3 } from "./components/ui/typography";
+import area from "./assets/skills/area.webp";
+import lethality from "./assets/skills/lethality.webp";
+import leviathan from "./assets/skills/leviathan.webp";
+import merciless from "./assets/skills/merciless.webp";
+import multicast from "./assets/skills/multicast.webp";
+import powerfulStrikes from "./assets/skills/powerful-strikes.webp";
+import relentless from "./assets/skills/relentless.webp";
 
 const UpgradesTable = () => {
   const { profile, setProfile } = useContext(ProfileContext);
 
   return (
     <section>
-      <H3>Upgrades</H3>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Attribute</TableHead>
-            <TableHead>Current</TableHead>
-            {[common, uncommon, rare, epic, legendary].map((rarity) => (
-              <TableHead key={rarity}>
-                <img src={rarity} className="w-12" />
+            <TableHead>Upgrades</TableHead>
+            {(
+              [
+                {
+                  label: "Common",
+                  imgSrc: common,
+                },
+                {
+                  label: "Uncommon",
+                  imgSrc: uncommon,
+                },
+                {
+                  label: "Rare",
+                  imgSrc: rare,
+                },
+                {
+                  label: "Epic",
+                  imgSrc: epic,
+                },
+                {
+                  label: "Legendary",
+                  imgSrc: legendary,
+                },
+              ] as {
+                label: string;
+                imgSrc: string;
+              }[]
+            ).map((rarity) => (
+              <TableHead key={rarity.label}>
+                <div className="flex flex-col items-center">
+                  <img
+                    src={rarity.imgSrc}
+                    className="w-12"
+                    alt={rarity.label}
+                  />
+                  <div>{rarity.label}</div>
+                </div>
               </TableHead>
             ))}
           </TableRow>
@@ -41,66 +78,74 @@ const UpgradesTable = () => {
           {(
             [
               {
-                label: "Damage modifier (Powerful strikes)",
-                field: "damageModifier",
+                label: "Powerful strikes",
                 skill: "POWERFUL_STRIKES",
+                imgSrc: powerfulStrikes,
               },
               {
-                label: "Critical damage chance (Lethality)",
-                field: "criticalDamageChance",
+                label: "Lethality",
                 skill: "LETHALITY",
+                imgSrc: lethality,
               },
               {
-                label: "Critical damage modifier (Merciless)",
-                field: "criticalDamageModifier",
+                label: "Merciless",
                 skill: "MERCILESS",
+                imgSrc: merciless,
               },
               {
-                label: "Cast frequency modifier (Relentless)",
-                field: "castFrequencyModifier",
+                label: "Relentless",
                 skill: "RELENTLESS",
+                imgSrc: relentless,
               },
               {
-                label: "Area modifier (Area)",
-                field: "areaModifier",
+                label: "Area",
                 skill: "AREA",
+                imgSrc: area,
               },
               {
-                label: "Multi cast chance (Multicast)",
-                field: "multiCastChance",
+                label: "Multicast",
                 skill: "MULTICAST",
+                imgSrc: multicast,
               },
               {
-                label: "Damage modifier (Leviathan)",
-                field: "damageModifier",
+                label: "Leviathan",
                 skill: "LEVIATHAN",
+                imgSrc: leviathan,
               },
             ] as {
               label: string;
-              field: keyof Profile;
               skill: Skill;
+              imgSrc: string;
             }[]
-          ).map((row) => (
-            <TableRow key={row.label}>
-              <TableCell>{row.label}</TableCell>
-              <TableCell>{profile[row.field]}</TableCell>
+          ).map((upgrade) => (
+            <TableRow key={upgrade.label}>
+              <TableCell className="flex flex-col items-center">
+                <img
+                  src={upgrade.imgSrc}
+                  className="w-16"
+                  alt={upgrade.label}
+                />
+                <div>{upgrade.label}</div>
+              </TableCell>
               {(
                 ["COMMON", "UNCOMMON", "RARE", "EPIC", "LEGENDARY"] as Rarity[]
               ).map((rarity) => {
-                const next = nextProfile(profile, row.skill, rarity);
+                const next = nextProfile(profile, upgrade.skill, rarity);
                 const increment = compareOffensiveFactor(profile, next);
                 return (
                   <TableCell key={rarity}>
-                    {increment || "-"}
-                    {!!increment && (
-                      <Button
-                        type="button"
-                        variant={"link"}
-                        onClick={() => setProfile(next)}
-                      >
-                        Apply
-                      </Button>
-                    )}
+                    <div className="flex flex-col items-center">
+                      {increment || "-"}
+                      {!!increment && (
+                        <Button
+                          type="button"
+                          variant={"link"}
+                          onClick={() => setProfile(next)}
+                        >
+                          Pick
+                        </Button>
+                      )}
+                    </div>
                   </TableCell>
                 );
               })}
