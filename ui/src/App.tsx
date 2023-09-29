@@ -1,8 +1,8 @@
 import { useState } from "react";
 import ProfileContext from "./Profile.context";
-import ProfileForm from "./ProfileForm";
 import { Profile } from "./lib/types";
-import StatsTable from "./StatsTable";
+import UpgradesTable from "./UpgradesTable";
+import ProfileOverview from "./ProfileOverview";
 
 const App = () => {
   const [profile, setProfile] = useState<Profile>({
@@ -18,10 +18,10 @@ const App = () => {
     <ProfileContext.Provider value={{ profile, setProfile }}>
       <main className="container">
         <section className="w-3/4 mx-auto p-4">
-          <ProfileForm />
+          <ProfileOverview />
         </section>
 
-        <StatsTable />
+        <UpgradesTable />
       </main>
     </ProfileContext.Provider>
   );

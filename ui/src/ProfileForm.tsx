@@ -5,11 +5,14 @@ import { Button } from "./components/ui/button";
 import { Profile } from "./lib/types";
 import { useContext, useEffect } from "react";
 import ProfileContext from "./Profile.context";
-import { H3 } from "./components/ui/typography";
 
 interface ProfileFormData extends Profile {}
 
-const ProfileForm = () => {
+interface ProfileFormProps {
+  onSuccess?: () => void;
+}
+
+const ProfileForm = ({ onSuccess }: ProfileFormProps) => {
   const { profile, setProfile } = useContext(ProfileContext);
 
   const { register, handleSubmit, reset } = useForm<ProfileFormData>({
@@ -18,6 +21,7 @@ const ProfileForm = () => {
 
   const onSubmit = handleSubmit((data) => {
     setProfile(data);
+    onSuccess && onSuccess();
   });
 
   useEffect(() => {
@@ -26,7 +30,6 @@ const ProfileForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <H3>Profile</H3>
       {(
         [
           {
@@ -55,7 +58,7 @@ const ProfileForm = () => {
           },
         ] as { label: string; field: keyof ProfileFormData }[]
       ).map((field) => (
-        <div key={field.field} className="grid grid-cols-2 items-center">
+        <div key={field.field} className="grid grid-cols-2 items-center mb-2">
           <Label htmlFor={field.field}>{field.label}</Label>
           <Input
             id={field.field}

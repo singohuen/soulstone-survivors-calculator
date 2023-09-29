@@ -18,12 +18,12 @@ import legendary from "./assets/rarity-frames/legendary.webp";
 import { Button } from "./components/ui/button";
 import { H3 } from "./components/ui/typography";
 
-const StatsTable = () => {
+const UpgradesTable = () => {
   const { profile, setProfile } = useContext(ProfileContext);
 
   return (
     <section>
-      <H3>Stats</H3>
+      <H3>Upgrades</H3>
       <Table>
         <TableHeader>
           <TableRow>
@@ -112,4 +112,4 @@ const StatsTable = () => {
   );
 };
 
-export default StatsTable;
+export default UpgradesTable;
