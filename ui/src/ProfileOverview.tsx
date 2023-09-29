@@ -9,6 +9,8 @@ import {
 } from "./components/ui/dialog";
 import { Button } from "./components/ui/button";
 import ProfileForm from "./ProfileForm";
+import { Card, CardContent } from "./components/ui/card";
+import { H3, Large, Muted } from "./components/ui/typography";
 
 const ProfileOverview = () => {
   const { profile } = useContext(ProfileContext);
@@ -16,40 +18,64 @@ const ProfileOverview = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div>
-      <div className="grid grid-cols-2">
-        <div>Damage modifier</div>
-        <div>{profile.damageModifier}</div>
+    <section className="mb-16">
+      <H3>
+        Profile
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger>
+            <Button variant={"link"}>Update</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle className="mb-8">Update profile</DialogTitle>
 
-        <div>Critical damage chance</div>
-        <div>{profile.criticalDamageChance}</div>
+              <ProfileForm onSuccess={() => setOpen(false)} />
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      </H3>
 
-        <div>Critical damage modifier</div>
-        <div>{profile.criticalDamageModifier}</div>
-
-        <div>Cast frequency modifier</div>
-        <div>{profile.castFrequencyModifier}</div>
-
-        <div>Area modifier</div>
-        <div>{profile.areaModifier}</div>
-
-        <div>Multi cast chance</div>
-        <div>{profile.multiCastChance}</div>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {(
+          [
+            {
+              label: "Damage modifier",
+              value: profile.damageModifier + "%",
+            },
+            {
+              label: "Critical damage chance",
+              value: profile.criticalDamageChance + "%",
+            },
+            {
+              label: "Critical damage modifier",
+              value: profile.criticalDamageModifier + "%",
+            },
+            {
+              label: "Cast frequency modifier",
+              value: profile.castFrequencyModifier + "%",
+            },
+            {
+              label: "Area modifier",
+              value: profile.areaModifier + "%",
+            },
+            {
+              label: "Multi cast chance",
+              value: profile.multiCastChance + "%",
+            },
+          ] as {
+            label: string;
+            value: string;
+          }[]
+        ).map((stat) => (
+          <Card key={stat.label}>
+            <CardContent className="mt-8">
+              <Muted className="mb-2">{stat.label}</Muted>
+              <Large>{stat.value}</Large>
+            </CardContent>
+          </Card>
+        ))}
       </div>
-
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger>
-          <Button variant={"link"}>Edit</Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle className="mb-8">Update profile</DialogTitle>
-
-            <ProfileForm onSuccess={() => setOpen(false)} />
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
-    </div>
+    </section>
   );
 };
 

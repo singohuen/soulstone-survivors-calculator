@@ -16,10 +16,8 @@ const App = () => {
 
   return (
     <ProfileContext.Provider value={{ profile, setProfile }}>
-      <main className="container">
-        <section className="w-3/4 mx-auto p-4">
-          <ProfileOverview />
-        </section>
+      <main className="container pt-8">
+        <ProfileOverview />
 
         <UpgradesTable />
       </main>

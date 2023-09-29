@@ -60,3 +60,28 @@ export const P = forwardRef<ElementRef<"p">, ComponentPropsWithoutRef<"p">>(
     </p>
   )
 );
+
+export const Large = forwardRef<
+  ElementRef<"div">,
+  ComponentPropsWithoutRef<"div">
+>(({ className, children, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(cva("text-lg font-semibold")(), className)}
+    {...props}
+  >
+    {children}
+  </div>
+));
+
+export const Muted = forwardRef<ElementRef<"p">, ComponentPropsWithoutRef<"p">>(
+  ({ className, children, ...props }, ref) => (
+    <p
+      ref={ref}
+      className={cn(cva("text-sm text-muted-foreground")(), className)}
+      {...props}
+    >
+      {children}
+    </p>
+  )
+);
