@@ -10,6 +10,7 @@ const CaseContext = createContext<{
     criticalDamageChance: 0,
     criticalDamageModifier: 0,
     castFrequencyModifier: 0,
+    areaModifier: 0,
     multiCastChance: 0,
   },
   setProfile: () => {},
