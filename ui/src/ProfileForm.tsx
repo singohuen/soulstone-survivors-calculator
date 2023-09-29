@@ -3,7 +3,7 @@ import { Input } from "./components/ui/input";
 import { Label } from "./components/ui/label";
 import { Button } from "./components/ui/button";
 import { Profile } from "./lib/types";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import ProfileContext from "./Profile.context";
 
 interface ProfileFormData extends Profile {}
@@ -28,36 +28,39 @@ const ProfileForm = ({ onSuccess }: ProfileFormProps) => {
     reset(profile);
   }, [profile, reset]);
 
+  const fields = useMemo<{ label: string; field: keyof ProfileFormData }[]>(
+    () => [
+      {
+        label: "Damage modifier",
+        field: "damageModifier",
+      },
+      {
+        label: "Critical damage chance",
+        field: "criticalDamageChance",
+      },
+      {
+        label: "Critical damage modifier",
+        field: "criticalDamageModifier",
+      },
+      {
+        label: "Cast frequency modifier",
+        field: "castFrequencyModifier",
+      },
+      {
+        label: "Area modifier",
+        field: "areaModifier",
+      },
+      {
+        label: "Multi cast chance",
+        field: "multiCastChance",
+      },
+    ],
+    []
+  );
+
   return (
     <form onSubmit={onSubmit}>
-      {(
-        [
-          {
-            label: "Damage modifier",
-            field: "damageModifier",
-          },
-          {
-            label: "Critical damage chance",
-            field: "criticalDamageChance",
-          },
-          {
-            label: "Critical damage modifier",
-            field: "criticalDamageModifier",
-          },
-          {
-            label: "Cast frequency modifier",
-            field: "castFrequencyModifier",
-          },
-          {
-            label: "Area modifier",
-            field: "areaModifier",
-          },
-          {
-            label: "Multi cast chance",
-            field: "multiCastChance",
-          },
-        ] as { label: string; field: keyof ProfileFormData }[]
-      ).map((field) => (
+      {fields.map((field) => (
         <div key={field.field} className="grid grid-cols-2 items-center mb-2">
           <Label htmlFor={field.field}>{field.label}</Label>
           <Input

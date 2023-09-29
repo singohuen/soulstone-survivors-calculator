@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import {
   Table,
   TableBody,
@@ -28,39 +28,91 @@ import { MoveUp } from "lucide-react";
 const UpgradesTable = () => {
   const { profile, setProfile } = useContext(ProfileContext);
 
+  const rarities = useMemo<
+    {
+      label: string;
+      imgSrc: string;
+    }[]
+  >(
+    () => [
+      {
+        label: "Common",
+        imgSrc: common,
+      },
+      {
+        label: "Uncommon",
+        imgSrc: uncommon,
+      },
+      {
+        label: "Rare",
+        imgSrc: rare,
+      },
+      {
+        label: "Epic",
+        imgSrc: epic,
+      },
+      {
+        label: "Legendary",
+        imgSrc: legendary,
+      },
+    ],
+    []
+  );
+
+  const upgrades = useMemo<
+    {
+      label: string;
+      skill: Skill;
+      imgSrc: string;
+    }[]
+  >(
+    () => [
+      {
+        label: "Powerful strikes",
+        skill: "POWERFUL_STRIKES",
+        imgSrc: powerfulStrikes,
+      },
+      {
+        label: "Lethality",
+        skill: "LETHALITY",
+        imgSrc: lethality,
+      },
+      {
+        label: "Merciless",
+        skill: "MERCILESS",
+        imgSrc: merciless,
+      },
+      {
+        label: "Relentless",
+        skill: "RELENTLESS",
+        imgSrc: relentless,
+      },
+      {
+        label: "Area",
+        skill: "AREA",
+        imgSrc: area,
+      },
+      {
+        label: "Multicast",
+        skill: "MULTICAST",
+        imgSrc: multicast,
+      },
+      {
+        label: "Leviathan",
+        skill: "LEVIATHAN",
+        imgSrc: leviathan,
+      },
+    ],
+    []
+  );
+
   return (
     <section>
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Upgrades</TableHead>
-            {(
-              [
-                {
-                  label: "Common",
-                  imgSrc: common,
-                },
-                {
-                  label: "Uncommon",
-                  imgSrc: uncommon,
-                },
-                {
-                  label: "Rare",
-                  imgSrc: rare,
-                },
-                {
-                  label: "Epic",
-                  imgSrc: epic,
-                },
-                {
-                  label: "Legendary",
-                  imgSrc: legendary,
-                },
-              ] as {
-                label: string;
-                imgSrc: string;
-              }[]
-            ).map((rarity) => (
+            {rarities.map((rarity) => (
               <TableHead key={rarity.label}>
                 <div className="flex flex-col items-center">
                   <img
@@ -76,49 +128,7 @@ const UpgradesTable = () => {
         </TableHeader>
 
         <TableBody>
-          {(
-            [
-              {
-                label: "Powerful strikes",
-                skill: "POWERFUL_STRIKES",
-                imgSrc: powerfulStrikes,
-              },
-              {
-                label: "Lethality",
-                skill: "LETHALITY",
-                imgSrc: lethality,
-              },
-              {
-                label: "Merciless",
-                skill: "MERCILESS",
-                imgSrc: merciless,
-              },
-              {
-                label: "Relentless",
-                skill: "RELENTLESS",
-                imgSrc: relentless,
-              },
-              {
-                label: "Area",
-                skill: "AREA",
-                imgSrc: area,
-              },
-              {
-                label: "Multicast",
-                skill: "MULTICAST",
-                imgSrc: multicast,
-              },
-              {
-                label: "Leviathan",
-                skill: "LEVIATHAN",
-                imgSrc: leviathan,
-              },
-            ] as {
-              label: string;
-              skill: Skill;
-              imgSrc: string;
-            }[]
-          ).map((upgrade) => (
+          {upgrades.map((upgrade) => (
             <TableRow key={upgrade.label}>
               <TableCell className="flex flex-col items-center">
                 <img

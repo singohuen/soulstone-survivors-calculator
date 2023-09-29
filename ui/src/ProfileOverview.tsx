@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import ProfileContext from "./Profile.context";
 import {
   Dialog,
@@ -16,6 +16,41 @@ const ProfileOverview = () => {
   const { profile } = useContext(ProfileContext);
 
   const [open, setOpen] = useState(false);
+
+  const stats = useMemo<
+    {
+      label: string;
+      value: string;
+    }[]
+  >(
+    () => [
+      {
+        label: "Damage modifier",
+        value: profile.damageModifier + "%",
+      },
+      {
+        label: "Critical damage chance",
+        value: profile.criticalDamageChance + "%",
+      },
+      {
+        label: "Critical damage modifier",
+        value: profile.criticalDamageModifier + "%",
+      },
+      {
+        label: "Cast frequency modifier",
+        value: profile.castFrequencyModifier + "%",
+      },
+      {
+        label: "Area modifier",
+        value: profile.areaModifier + "%",
+      },
+      {
+        label: "Multi cast chance",
+        value: profile.multiCastChance + "%",
+      },
+    ],
+    [profile]
+  );
 
   return (
     <section className="mb-16">
@@ -38,37 +73,7 @@ const ProfileOverview = () => {
       </H3>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        {(
-          [
-            {
-              label: "Damage modifier",
-              value: profile.damageModifier + "%",
-            },
-            {
-              label: "Critical damage chance",
-              value: profile.criticalDamageChance + "%",
-            },
-            {
-              label: "Critical damage modifier",
-              value: profile.criticalDamageModifier + "%",
-            },
-            {
-              label: "Cast frequency modifier",
-              value: profile.castFrequencyModifier + "%",
-            },
-            {
-              label: "Area modifier",
-              value: profile.areaModifier + "%",
-            },
-            {
-              label: "Multi cast chance",
-              value: profile.multiCastChance + "%",
-            },
-          ] as {
-            label: string;
-            value: string;
-          }[]
-        ).map((stat) => (
+        {stats.map((stat) => (
           <Card key={stat.label}>
             <CardContent className="mt-8">
               <Muted className="mb-2">{stat.label}</Muted>
