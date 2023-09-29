@@ -3,8 +3,8 @@ import { Input } from "./components/ui/input";
 import { Label } from "./components/ui/label";
 import { Button } from "./components/ui/button";
 import { Profile } from "./lib/types";
-import { useContext, useEffect, useMemo } from "react";
-import ProfileContext from "./Profile.context";
+import { useContext, useMemo } from "react";
+import ProfileContext, { DEFAULT_PROFILE } from "./Profile.context";
 
 interface ProfileFormData extends Profile {}
 
@@ -23,10 +23,6 @@ const ProfileForm = ({ onSuccess }: ProfileFormProps) => {
     setProfile(data);
     onSuccess && onSuccess();
   });
-
-  useEffect(() => {
-    reset(profile);
-  }, [profile, reset]);
 
   const fields = useMemo<{ label: string; field: keyof ProfileFormData }[]>(
     () => [
@@ -71,6 +67,15 @@ const ProfileForm = ({ onSuccess }: ProfileFormProps) => {
       ))}
 
       <Button className="w-full mt-8">Save</Button>
+
+      <Button
+        type="button"
+        variant={"outline"}
+        className="w-full mt-2"
+        onClick={() => reset(DEFAULT_PROFILE)}
+      >
+        Reset
+      </Button>
     </form>
   );
 };
